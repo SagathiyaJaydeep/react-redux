@@ -1,6 +1,12 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { decre, incre } from "./CounterSlice";
 
 function ButtonUi() {
+  const data = useSelector((state) => state.demo.count);
+  const dispatch = useDispatch();
+  console.log(data);
+
   return (
     <div
       style={{
@@ -11,7 +17,7 @@ function ButtonUi() {
         alignItems: "center",
       }}
     >
-      <h1>10</h1>
+      <h1>{data}</h1>
       <div>
         <button
           style={{
@@ -20,6 +26,7 @@ function ButtonUi() {
             backgroundColor: "skyblue",
             borderRadius: "5px",
           }}
+          onClick={() => dispatch(incre())}
         >
           INC
         </button>
@@ -30,6 +37,7 @@ function ButtonUi() {
             backgroundColor: "skyblue",
             borderRadius: "5px",
           }}
+          onClick={() => dispatch(decre())}
         >
           DEC
         </button>
