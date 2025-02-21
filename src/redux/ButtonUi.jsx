@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { decre, incre } from "./CounterSlice";
+import { decre, incre, incBy5 } from "./CounterSlice";
 
 function ButtonUi() {
-  const data = useSelector((state) => state.demo.count);
-  const dispatch = useDispatch();
-  console.log(data);
+  const data = useSelector((state) => state.demo.count); // Read data from the store
+  const dispatch = useDispatch(); // Get All Action(Functions) from the store
 
+  console.log(data);
   return (
     <div
       style={{
@@ -41,7 +41,30 @@ function ButtonUi() {
         >
           DEC
         </button>
+        <button
+          style={{
+            padding: "10px 20px",
+            margin: "10px",
+            backgroundColor: "skyblue",
+            borderRadius: "5px",
+          }}
+          onClick={() => dispatch(incBy5(100))}
+        >
+          INCBY5
+        </button>
       </div>
+      <form>
+        <div className="form-group">
+          <label htmlFor="formGroupExampleInput">Enter Value :</label>
+          <input
+            type="text"
+            className="form-control"
+            id="formGroupExampleInput"
+            placeholder="Enter Value"
+          />
+        </div>
+        <input type="submit" value="Submit" />
+      </form>
     </div>
   );
 }

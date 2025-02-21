@@ -3,17 +3,26 @@ import { createSlice } from "@reduxjs/toolkit";
 export const CounterSlice = createSlice({
   name: "demo",
   initialState: {
-    count: 20,
+    count: 1,
   },
   reducers: {
     incre: (state) => {
-      state.count += 1;
+      if (state.count < 10) {
+        state.count += 1;
+      } else {
+        alert(`Maximum Cart Added ${state.count}`);
+      }
     },
     decre: (state) => {
-      state.count -= 1;
+      if (state.count > 0) {
+        state.count -= 1;
+      }
+    },
+    incBy5: (state, action) => {
+      state.count += action.payload;
     },
   },
 });
 
-export const { incre, decre } = CounterSlice.actions;
+export const { incre, decre, incBy5 } = CounterSlice.actions;
 export default CounterSlice.reducer;
