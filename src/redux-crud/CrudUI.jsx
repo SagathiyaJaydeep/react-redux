@@ -1,6 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { setInputValue } from "./InsertSlice";
 import { Formik, Field, Form } from "formik";
 
@@ -22,8 +34,10 @@ function CrudUI() {
         sx={{
           display: "flex",
           justifyContent: "center",
+          flexFlow: "column",
+          gap: "50px",
           alignItems: "center",
-          height: "100vh",
+          margin: "50px",
         }}
       >
         <Box
@@ -84,9 +98,39 @@ function CrudUI() {
               <Field as={Button} type="submit" variant="contained">
                 Submit
               </Field>
-              <Typography variant="h6">{data}</Typography>
             </Form>
           </Formik>
+        </Box>
+        <Box>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>No</TableCell>
+                  <TableCell align="right">FirstName</TableCell>
+                  <TableCell align="right">LastName</TableCell>
+                  <TableCell align="right">Email</TableCell>
+                  <TableCell align="right">Age</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {list.map((el, i) => (
+                  <TableRow
+                    key={i}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {i + 1}
+                    </TableCell>
+                    <TableCell align="right">{el.firstname}</TableCell>
+                    <TableCell align="right">{el.lastname}</TableCell>
+                    <TableCell align="right">{el.email}</TableCell>
+                    <TableCell align="right">{el.age}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Box>
       </Box>
     </>
