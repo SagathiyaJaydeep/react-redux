@@ -6,8 +6,6 @@ function ButtonUi() {
   const data = useSelector((state) => state.demo.count); // Read data from the store
   const InputData = useSelector((state) => state.demo.inputValue); // Read data from the store
   const dispatch = useDispatch(); // Get All Action(Functions) from the store
-
-  console.log(data);
   return (
     <div
       style={{
@@ -21,49 +19,33 @@ function ButtonUi() {
       <h1>{data}</h1>
       <input
         type="text"
-        className="form-control"
-        id="formGroupExampleInput"
         placeholder="Enter Value"
         value={InputData}
         onChange={(e) => dispatch(setInputValue(Number(e.target.value) || 0))}
       />
       <div>
-        <button
-          style={{
-            padding: "10px 20px",
-            margin: "10px",
-            backgroundColor: "skyblue",
-            borderRadius: "5px",
-          }}
-          onClick={() => dispatch(incre())}
-        >
+        <button style={buttonStyle} onClick={() => dispatch(incre())}>
           INC
         </button>
-        <button
-          style={{
-            padding: "10px 20px",
-            margin: "10px",
-            backgroundColor: "skyblue",
-            borderRadius: "5px",
-          }}
-          onClick={() => dispatch(decre())}
-        >
+        <button style={buttonStyle} onClick={() => dispatch(decre())}>
           DEC
         </button>
         <button
-          style={{
-            padding: "10px 20px",
-            margin: "10px",
-            backgroundColor: "skyblue",
-            borderRadius: "5px",
-          }}
+          style={buttonStyle}
           onClick={() => dispatch(incBy5(Number(InputData)))}
         >
-          INCBY5
+          IncByValue
         </button>
       </div>
     </div>
   );
 }
+
+const buttonStyle = {
+  padding: "10px 20px",
+  margin: "10px",
+  backgroundColor: "skyblue",
+  borderRadius: "5px",
+};
 
 export default ButtonUi;
