@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, TextField, Typography } from "@mui/material";
+import { setInputValue } from "./InsertSlice";
+import { Formik, Field, Form } from "formik";
+
 function CrudUI() {
+  const data = useSelector((state) => state.create.value);
+  const inputData = useSelector((state) => state.create.inputValue);
+  const list = useSelector((state) => state.create.list);
+  console.log(list);
+  const dispatch = useDispatch();
+
+  const handleSubmit = (values, { resetForm }) => {
+    dispatch(setInputValue(values));
+    resetForm();
+  };
+
   return (
     <>
       <Box
@@ -23,36 +38,55 @@ function CrudUI() {
             gap: "20px",
           }}
         >
-          <Typography variant="h5">Redux-CRUD</Typography>
+          <Formik
+            enableReinitialize
+            initialValues={inputData}
+            onSubmit={handleSubmit}
+          >
+            <Form
+              style={{ display: "flex", flexFlow: "column", rowGap: "20px" }}
+            >
+              <Typography variant="h5">Redux-CRUD</Typography>
 
-          <TextField
-            variant="outlined"
-            label="FirstName"
-            name="firstname"
-            sx={{ width: "100%" }}
-          />
+              <Field
+                as={TextField}
+                variant="outlined"
+                label="FirstName"
+                name="firstname"
+                sx={{ width: "100%" }}
+              />
 
-          <TextField
-            variant="outlined"
-            label="LastName"
-            name="lastname"
-            sx={{ width: "100%" }}
-          />
+              <Field
+                as={TextField}
+                variant="outlined"
+                label="LastName"
+                name="lastname"
+                sx={{ width: "100%" }}
+              />
 
-          <TextField
-            variant="outlined"
-            label="Email"
-            name="email"
-            sx={{ width: "100%" }}
-          />
+              <Field
+                as={TextField}
+                variant="outlined"
+                label="Email"
+                name="email"
+                type="email"
+                sx={{ width: "100%" }}
+              />
 
-          <TextField
-            variant="outlined"
-            label="Age"
-            name="age"
-            sx={{ width: "100%" }}
-          />
-          <Button variant="contained">Submit</Button>
+              <Field
+                as={TextField}
+                variant="outlined"
+                label="Age"
+                name="age"
+                type="number"
+                sx={{ width: "100%" }}
+              />
+              <Field as={Button} type="submit" variant="contained">
+                Submit
+              </Field>
+              <Typography variant="h6">{data}</Typography>
+            </Form>
+          </Formik>
         </Box>
       </Box>
     </>
