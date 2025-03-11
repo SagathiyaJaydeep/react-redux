@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -13,14 +13,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { setInputValue } from "./InsertSlice";
+import { setInputValue, deleteData, updateData } from "./InsertSlice";
 import { Formik, Field, Form } from "formik";
 
 function CrudUI() {
-  const data = useSelector((state) => state.create.value);
   const inputData = useSelector((state) => state.create.inputValue);
   const list = useSelector((state) => state.create.list);
-  console.log(list);
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
@@ -107,10 +105,12 @@ function CrudUI() {
               <TableHead>
                 <TableRow>
                   <TableCell>No</TableCell>
-                  <TableCell align="right">FirstName</TableCell>
-                  <TableCell align="right">LastName</TableCell>
-                  <TableCell align="right">Email</TableCell>
-                  <TableCell align="right">Age</TableCell>
+                  <TableCell>FirstName</TableCell>
+                  <TableCell>LastName</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>Age</TableCell>
+                  <TableCell>DELETE</TableCell>
+                  <TableCell>UPDATE</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -122,10 +122,28 @@ function CrudUI() {
                     <TableCell component="th" scope="row">
                       {i + 1}
                     </TableCell>
-                    <TableCell align="right">{el.firstname}</TableCell>
-                    <TableCell align="right">{el.lastname}</TableCell>
-                    <TableCell align="right">{el.email}</TableCell>
-                    <TableCell align="right">{el.age}</TableCell>
+                    <TableCell>{el.firstname}</TableCell>
+                    <TableCell>{el.lastname}</TableCell>
+                    <TableCell>{el.email}</TableCell>
+                    <TableCell>{el.age}</TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        color="error"
+                        onClick={() => dispatch(deleteData(i))}
+                      >
+                        Delete
+                      </Button>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => dispatch(updateData({el : el , i:i}))}
+                      >
+                        Update
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
