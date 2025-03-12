@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import InsertSlice from "./InsertSlice";
+import CrudSlice from "./CrudSlice";
 
 export default configureStore({
   reducer: {
-    create: InsertSlice,
+    create: CrudSlice,
   },
 });

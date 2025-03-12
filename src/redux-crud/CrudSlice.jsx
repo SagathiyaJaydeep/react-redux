@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const InsertSlice = createSlice({
+export const CrudSlice = createSlice({
   name: "create",
   initialState: {
     value: "No Data Inserted !!",
@@ -37,5 +37,5 @@ export const InsertSlice = createSlice({
   },
 });
 
-export const { setInputValue, deleteData, updateData } = InsertSlice.actions;
-export default InsertSlice.reducer;
+export const { setInputValue, deleteData, updateData } = CrudSlice.actions;
+export default CrudSlice.reducer;

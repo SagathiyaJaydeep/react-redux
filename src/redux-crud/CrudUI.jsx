@@ -13,7 +13,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { setInputValue, deleteData, updateData } from "./InsertSlice";
+import { setInputValue, deleteData, updateData } from "./CrudSlice";
 import { Formik, Field, Form } from "formik";
 
 function CrudUI() {
@@ -32,10 +32,9 @@ function CrudUI() {
         sx={{
           display: "flex",
           justifyContent: "center",
-          flexFlow: "column",
           gap: "50px",
-          alignItems: "center",
           margin: "50px",
+          alignItems: "top",
         }}
       >
         <Box
@@ -139,7 +138,7 @@ function CrudUI() {
                       <Button
                         variant="contained"
                         color="secondary"
-                        onClick={() => dispatch(updateData({el : el , i:i}))}
+                        onClick={() => dispatch(updateData({ el: el, i: i }))}
                       >
                         Update
                       </Button>
